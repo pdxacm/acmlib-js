@@ -228,6 +228,7 @@ function acmlib (username, password, base_url) {
 
     /*
      */
+
     
     function process_request(method, url, data, model) {
         return new RSVP.Promise(function(resolve, reject) {
@@ -241,7 +242,8 @@ function acmlib (username, password, base_url) {
 
                     if ('map' in json) {
                         resolve(json.map(function (x) {
-                            return x.prototype = model
+                            x.prototype = model
+                            return x;
                         }));
                     } else {
                         json.prototype = model;

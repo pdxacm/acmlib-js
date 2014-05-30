@@ -1,0 +1,21 @@
+{
+  "name": "acmlib",
+  "version": "0.0.0",
+  "homepage": "https://github.com/pdxacm/acmlib-js",
+  "authors": [
+    "Cameron Brandon White <cameronbwhite90@gmail.com>"
+  ],
+  "description": "Javascript library for acmapi",
+  "main": "acmlib.js",
+  "license": "BSDv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "rsvp": "~3.0.6"
+  }
+}

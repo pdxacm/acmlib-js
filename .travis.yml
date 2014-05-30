@@ -1,0 +1,9 @@
+install:
+    - npm install -g bower 
+    - bower install jasmine jasmine.async sinonjs
+    - bower install https://github.com/jcarver989/phantom-jasmine.git
+    - bower install
+# command to run tests
+script: node bower_components/phantom-jasmine/bin/phantom-jasmine tests/TestRunner.html
+notifications:
+    irc: "irc.cat.pdx.edu#acm-dev"

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="../bower_components/phantom-jasmine/vendor/jasmine-1.2.0/jasmine.css">
+  <script type="text/javascript" src="../bower_components/phantom-jasmine/vendor/jasmine-1.2.0/jasmine.js"></script>
+  <script type="text/javascript" src="../bower_components/phantom-jasmine/vendor/jasmine-1.2.0/jasmine-html.js"></script>
+
+  <script type="text/javascript" src="../bower_components/phantom-jasmine/lib/console-runner.js"></script>
+  <script type="text/javascript" src="../bower_components/jasmine.async/lib/jasmine.async.js"></script>
+
+  <!-- SOURCE FILES -->
+  <script type="text/javascript" src="../bower_components/rsvp/rsvp.js"></script>
+  <script type="text/javascript" src="../bower_components/sinonjs/sinon.js"></script>
+  <script type="text/javascript" src="../acmlib.js"></script>
+
+  <!-- TEST FILES -->
+  <script type="text/javascript" src="tests_spec.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+  var console_reporter = new jasmine.ConsoleReporter()
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().addReporter(console_reporter);
+  jasmine.getEnv().execute();
+</script>
+
+</body>
+</html>
+
