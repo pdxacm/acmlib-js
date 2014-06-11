@@ -2,20 +2,20 @@ function acmlib (username, password, base_url) {
     
     var public_object = {
 
-        get_person: function (id_or_username) 
+        get_person: function (id_or_username, params) 
         {
             return process_request(
-                    "GET", make_people_url(id_or_username),
+                    "GET", make_people_url(id_or_username, params),
                     null, person_model);
         },
    
-        get_people: function () 
+        get_people: function (params) 
         {
             return process_request(
-                    "GET", make_people_url(), null, person_model);
+                    "GET", make_people_url(params), null, person_model);
         },
 
-        add_person: function (username, password, name, email, website) 
+        add_person: function (username, password, name, email, website, params) 
         {
             var data = {
                 username: username,
@@ -25,10 +25,10 @@ function acmlib (username, password, base_url) {
                 website: website}
 
             return process_request(
-                    "POST", make_people_url(), data, person_model);
+                    "POST", make_people_url(params), data, person_model);
         },
 
-        update_person: function (id_or_username, password, name, email, website) 
+        update_person: function (id_or_username, password, name, email, website, params) 
         {
             var data = {
                 username: username,
@@ -38,23 +38,23 @@ function acmlib (username, password, base_url) {
                 website: website}
 
             return process_request(
-                "PUT", make_people_url(id_or_username), data, person_model);
+                "PUT", make_people_url(id_or_username, params), data, person_model);
         },
 
-        get_event: function (event_id) 
+        get_event: function (event_id, params) 
         {
             return process_request(
-                "GET", make_events_url(event_id), null, event_model);
+                "GET", make_events_url(event_id, params), null, event_model);
         },
 
-        get_events: function () 
+        get_events: function (params) 
         {
             return process_request(
-                "GET", make_events_url(), null, event_model);
+                "GET", make_events_url(params), null, event_model);
         },
 
         add_event: function(title, description, speaker, location, 
-                start, end, canceled, hidden) 
+                start, end, canceled, hidden, params) 
         {
             data = {
                 title: title,
@@ -67,11 +67,11 @@ function acmlib (username, password, base_url) {
                 hidden: hidden}
 
             return process_request(
-                "POST", make_events_url(), data, event_model);
+                "POST", make_events_url(params), data, event_model);
         },
             
         update_event: function (event_id, title, description, speaker, 
-                location, start, end, canceled, hidden) 
+                location, start, end, canceled, hidden, params) 
         {
 
             var data = {
@@ -85,22 +85,22 @@ function acmlib (username, password, base_url) {
                 hidden: hidden}
 
             return process_request(
-                "POST", make_events_url(event_id), data, event_model);
+                "POST", make_events_url(event_id, params), data, event_model);
         },
 
-        get_post: function(post_id) 
+        get_post: function(post_id, params) 
         {
             return process_request(
-                    "GET", make_posts_url(post_id), null, post_model);
+                    "GET", make_posts_url(post_id, params), null, post_model);
         },
 
-        get_posts: function () 
+        get_posts: function (params) 
         {
             return process_request(
-                "GET", make_posts_url(), null, post_model);
+                "GET", make_posts_url(params), null, post_model);
         },
 
-        add_post: function (title, description, content, hidden) 
+        add_post: function (title, description, content, hidden, params) 
         {
             var data = {
                 title: title,
@@ -109,10 +109,10 @@ function acmlib (username, password, base_url) {
                 hidden: hidden}
 
             return process_request(
-                    "POST", make_posts_url(), data, post_model);
+                    "POST", make_posts_url(params), data, post_model);
         },
 
-        update_post: function(post_id, title, description, content, hidden) {
+        update_post: function(post_id, title, description, content, hidden, params) {
 
             var data = {
                 title: title,
@@ -121,23 +121,23 @@ function acmlib (username, password, base_url) {
                 hidden: hidden}
 
             return process_request(
-                    "POST", make_posts_url(post_id), data, post_model);
+                    "POST", make_posts_url(post_id, params), data, post_model);
         },
 
-        get_membership: function(membership_id)
+        get_membership: function(membership_id, params)
         {
             return process_request(
-                "GET", make_memberships_url(membership_id),
+                "GET", make_memberships_url(membership_id, params),
                 null, membership_model);
         },
 
-        get_memberships: function() 
+        get_memberships: function(params) 
         {
             return process_request(
-                "GET", make_memberships_url(), null, membership_model);
+                "GET", make_memberships_url(params), null, membership_model);
         },
 
-        add_membership: function(person_id, start_date, end_date) {
+        add_membership: function(person_id, start_date, end_date, params) {
 
             var data = {
                 person_id: person_id,
@@ -145,10 +145,10 @@ function acmlib (username, password, base_url) {
                 end_date: end_date};
 
             return process_request(
-                    "POST", make_memberships_url(), data, membership_model);
+                    "POST", make_memberships_url(params), data, membership_model);
         },
 
-        update_membership: function(membership_id, person_id, start_date, end_date) {
+        update_membership: function(membership_id, person_id, start_date, end_date, params) {
 
             var data = {
                 person_id: person_id,
@@ -156,34 +156,22 @@ function acmlib (username, password, base_url) {
                 end_date: end_date};
 
             return process_request(
-                    "PUT", make_memberships_url(membership_id), data, 
+                    "PUT", make_memberships_url(membership_id, params), data, 
                     membership_model);
         },
 
-        get_officership: function(officership_id) {
+        get_officership: function(officership_id, params) {
             return process_request(
-                    "GET", make_officerships_url(officership_id),
+                    "GET", make_officerships_url(officership_id, params),
                     null, officership_model);
         },
 
-        get_officerships: function() {
+        get_officerships: function(params) {
             return process_request(
-                    "GET", make_officerships_url(), null, officership_model);
+                    "GET", make_officerships_url(params), null, officership_model);
        },
 
-        add_officership: function(person_id, title, start_date, end_date) {
-
-            var data = {
-                person_id: person_id,
-                title: title,
-                start_date: start_date,
-                end_date: end_date};
-
-            return process_request(
-                    "POST", make_officerships_url(), data, officership_model);
-        },
-
-        update_officership: function(officerships_id, person_id, title, start_date, end_date) 
+        add_officership: function(person_id, title, start_date, end_date, params) 
         {
 
             var data = {
@@ -193,7 +181,20 @@ function acmlib (username, password, base_url) {
                 end_date: end_date};
 
             return process_request(
-                    "PUT", make_officerships_url(officerships_id), data, 
+                    "POST", make_officerships_url(params), data, officership_model);
+        },
+
+        update_officership: function(officerships_id, person_id, title, start_date, end_date, params) 
+        {
+
+            var data = {
+                person_id: person_id,
+                title: title,
+                start_date: start_date,
+                end_date: end_date};
+
+            return process_request(
+                    "PUT", make_officerships_url(officerships_id, params), data, 
                     officership_model);
         }
     };
@@ -206,24 +207,24 @@ function acmlib (username, password, base_url) {
     /*
      */
 
-    function make_people_url(id_or_username) {
-        return make_url([base_url, '/people/', id_or_username]);
+    function make_people_url(id_or_username, params) {
+        return make_url([base_url, '/people/', id_or_username], params);
     };
 
-    function make_events_url(event_id) {
-        return make_url([base_url, '/events/', event_id]);
+    function make_events_url(event_id, params) {
+        return make_url([base_url, '/events/', event_id], params);
     };
     
-    function make_posts_url(post_id) {
-        return make_url([base_url, '/posts/', post_id]);
+    function make_posts_url(post_id, params) {
+        return make_url([base_url, '/posts/', post_id], params);
     };
     
-    function make_memberships_url(membership_id) {
-        return make_url([base_url, '/memberships/', membership_id]);
+    function make_memberships_url(membership_id, params) {
+        return make_url([base_url, '/memberships/', membership_id], params);
     };
 
-    function make_officerships_url(officership_id) {
-        return make_url([base_url, '/officerships/', officership_id]);
+    function make_officerships_url(officership_id, params) {
+        return make_url([base_url, '/officerships/', officership_id], params);
     };
 
     /*
@@ -301,16 +302,33 @@ function acmlib (username, password, base_url) {
     return public_object;
 };
 
-function make_url(url_parts) {
+function make_url(url_parts, params) {
     
     // Remove all undefined
     var url_parts = url_parts.filter(
             function(x) { if (typeof x !== undefined) return x; });
     
     // join all the pathname parts together
-    return url_parts.reduce(function(l, r) {
+    url =  url_parts.reduce(function(l, r) {
         return l.toString().replace(/\/$/, '') 
             + '/' + r.toString().replace(/^\//, ''); 
     });
-}
+    
+    // Add parms to the url
+    url += function (o) {
+        if (typeof o !== 'undefined') {
+            var a = []
+            for (var key in o) {
+                a.push(key.toString() + '=' + o[key].toString());
+            }
+            if (a.length > 0) {
+                return '?' + a.reduce(function(l, r) {
+                    return l.toString() + '&' + r.toString();
+                });
+            }
+        }
+        return '';
+    }(params);
 
+    return url;
+}
